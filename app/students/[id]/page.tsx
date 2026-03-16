@@ -15,6 +15,7 @@ export default function StudentDetails() {
   const [student, setStudent] = useState<any>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [image, setImage] = useState<string | null>(null);
+  const [loading , setLoading] = useState(true)
 
   useEffect(() => {
     fetch(
@@ -24,6 +25,7 @@ export default function StudentDetails() {
       .then((data) => {
         setStudent(data.data);
       });
+      setLoading(false)
   }, [id]);
 
      if (!student) return <p className="p-10">Loading...</p>;
@@ -44,7 +46,9 @@ export default function StudentDetails() {
           <Header onMenuClick={() => setSidebarOpen(true)} />
 
           {/* Page Content */}
-          <div className="flex-1 p-6 md:p-10 overflow-y-auto">
+          {loading ? (  <div className="flex justify-center items-center p-10">
+                    <div className="h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                  </div>):(   <div className="flex-1 p-6 md:p-10 overflow-y-auto">
             <div className="   mb-3 flex items-center gap-4 ">
               <Link
                 className="text-black flex items-center gap-1 font-bold"
@@ -120,7 +124,8 @@ export default function StudentDetails() {
                 </div>
               </div>
             </div>
-          </div>
+          </div>)}
+       
 
           {/* Image Modal */}
           {image && (
