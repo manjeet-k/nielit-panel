@@ -9,6 +9,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -17,8 +19,10 @@ export default function Login() {
 
   const loginAdmin = async (e: any) => {
     e.preventDefault();
-
+    if (loading || submitted) return;
+    setSubmitted(true);
     try {
+      setLoading(true);
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/admin/login`,
         {
@@ -35,11 +39,13 @@ export default function Login() {
         });
 
         localStorage.setItem("adminToken", res.data.token);
-
         window.location.href = "/dashboard";
       }
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Something went wrong");
+      setTimeout(() => setSubmitted(false), 3000);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,9 +90,10 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 cursor-pointer text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            disabled={loading || submitted}
+            className="w-full bg-blue-600 cursor-pointer text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
