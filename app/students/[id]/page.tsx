@@ -30,8 +30,8 @@ export default function StudentDetails() {
 
      if (!student) return <p className="p-10">Loading...</p>;
 
-  const photoSrc = `${process.env.NEXT_PUBLIC_API_URL}/${student.photo.replace(/\\/g, "/")}`;
-  const signSrc = `${process.env.NEXT_PUBLIC_API_URL}/${student.sign}`;
+  const photoSrc = student.photo;
+  const signSrc = student.sign;
 
   const openImage = (src: string) => {
     setImage(src);
@@ -115,7 +115,7 @@ export default function StudentDetails() {
                 <div>
                   <p className="font-semibold mb-2 text-gray-500">10th DMC</p>
                   <a
-                    href={`${process.env.NEXT_PUBLIC_API_URL}/${student.tenthDMC}`}
+                    href={student.tenthDMC}
                     target="_blank"
                     className="text-blue-600 underline"
                   >
