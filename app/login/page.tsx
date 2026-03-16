@@ -53,7 +53,7 @@ export default function Login() {
           </h1>
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        <h1 className="text-2xl cursor-pointer font-bold text-gray-800 mb-6 text-center">
           Admin Login
         </h1>
 
@@ -84,7 +84,7 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 cursor-pointer text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
           >
             Login
           </button>

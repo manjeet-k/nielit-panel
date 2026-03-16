@@ -45,7 +45,8 @@ export default function Dashboard() {
                 <div>
                   <p className="text-gray-500 text-sm">Total Students</p>
                   <h2 className="text-4xl font-bold text-blue-600 mt-2">
-                    {totalStudents}
+                    {totalStudents ? totalStudents : <div className="border-b-2 h-8 w-8 animate-spin rounded-full "></div>}
+                   
                   </h2>
                 </div>
                 <div className="bg-blue-100 text-blue-600 p-4 rounded-full text-2xl">
